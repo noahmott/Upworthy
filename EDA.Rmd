@@ -13,3 +13,32 @@ knitr::opts_chunk$set(echo = TRUE)
 mydata<-read.csv('data.csv')
 ```
 
+```{r}
+summary(mydata)
+```
+The above is a basic summary of the data in the dataset. You'll note that 
+
+```{r}
+library(dplyr)
+```
+```{r}
+mydata %>%
+  select(everything()) %>%  
+  summarise_all(funs(sum(is.na(.))))
+```
+All Data in the data frame is filled in. This is a good data set for exploration
+```{r}
+unique(mydata$zip_code)
+```
+```{r}
+unique(mydata$channel)
+```
+```{r}
+unique(mydata$offer)
+```
+We can see in the above unique values that the categorical columns for offer, zip_code, and channel each have 3 categories each. In order to appropriately use them in any sort of regression, we will need to encode the values 1 through 3.
+
+```{r}
+
+```
+
