@@ -2,7 +2,7 @@
 title: "EDA_of_Upworthy_dataset"
 author: "Noah Mott"
 date: "11/4/2021"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -32,13 +32,49 @@ unique(mydata$zip_code)
 ```
 ```{r}
 unique(mydata$channel)
+plot(as.factor(mydata$channel))
 ```
 ```{r}
 unique(mydata$offer)
+plot(as.factor(mydata$offer))
+
 ```
 We can see in the above unique values that the categorical columns for offer, zip_code, and channel each have 3 categories each. In order to appropriately use them in any sort of regression, we will need to encode the values 1 through 3.
 
 ```{r}
+plot(as.factor(mydata$zip_code))
+```
+```{r}
+chart1 <- table(as.factor(mydata$zip_code), as.factor(mydata$offer))
+chart2<-table(as.factor(mydata$zip_code), as.factor(mydata$channel))
+chart3<-table(as.factor(mydata$channel), as.factor(mydata$offer))
+```
+
+```{r}
+chart1
+chart2
+chart3
+```
+```{r}
+mydata %>%
+        group_by(zip_code) %>%
+        tally()
+mydata %>%
+        group_by(offer) %>%
+        tally()
+mydata %>%
+        group_by(channel) %>%
+        tally()
+```
+
+```{r}
+
+library(rlang)
+library(dplyr)
+mydata %>%
+        group_by(zip_code, offer, channel) %>%
+        tally()
 
 ```
 
+Note the above tables indicating the counts for each of the individual categories for the three different categorical variables as well as the counts for each grouping of all three 
