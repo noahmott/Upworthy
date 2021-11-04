@@ -1,0 +1,15 @@
+---
+title: "EDA_of_Upworthy_dataset"
+author: "Noah Mott"
+date: "11/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+mydata<-read.csv('data.csv')
+```
+
